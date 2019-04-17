@@ -14,6 +14,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import copy
 
+
 class Ui_MainWindow(object):
 
     def __init__(self):
@@ -24,8 +25,8 @@ class Ui_MainWindow(object):
         self.tar_sr = 0
         self.temp_data = 0
         self.length_flag = 0
-        self.y =0
-        self.got_bin_value =0
+        self.y = 0
+        self.got_bin_value = 0
 
     def load(self):
         dialog = QtWidgets.QFileDialog()
@@ -40,8 +41,6 @@ class Ui_MainWindow(object):
         name = dialog.getSaveFileName(None, "Window name", "", "Wav Files (*.wav)")
         print(name[0])
         sf.write(name[0], self.y, self.tar_sr)
-
-
 
     def play_original(self):
         pygame.init()
@@ -133,16 +132,15 @@ class Ui_MainWindow(object):
         self.got_bin_value = self.bin_line_edit.text()
 
     def get_mag_2(self):
-        self.mag_2= self.mag_line_edit.text()
+        self.mag_2 = self.mag_line_edit.text()
         print(self.mag_2)
 
-
     def get_freq_2(self):
-        self.freq_2= self.freq_line_edit_2.text()
+        self.freq_2 = self.freq_line_edit_2.text()
         print(self.freq_2)
 
     def number_samples_2(self):
-        self.y =0
+        self.y = 0
         self.num_samp = self.number_samples_line_edit.text()
 
     def set_y_data_2(self):
@@ -165,13 +163,12 @@ class Ui_MainWindow(object):
         print(self.got_bin_value)
 
     def amp_plot_2(self):
-        T = 1.0/self.tar_sr
+        T = 1.0 / self.tar_sr
         self.yf_2 = np.fft.rfft(self.y)
-        self.xf_2=np.linspace(0.0,1.0/(2.0*T),self.num_samp//2)
-        plt.plot(self.xf_2, 2.0/self.num_samp *np.abs(self.yf_2[0:self.num_samp//2]))
+        self.xf_2 = np.linspace(0.0, 1.0 / (2.0 * T), self.num_samp // 2)
+        plt.plot(self.xf_2, 2.0 / self.num_samp * np.abs(self.yf_2[0:self.num_samp // 2]))
         plt.grid()
         plt.show()
-
 
     def get_freq_idx(self):
         x = self.freq_line_edit.text()
@@ -474,10 +471,10 @@ class Ui_MainWindow(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
-
